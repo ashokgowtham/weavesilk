@@ -1,0 +1,12 @@
+#ignore local project files
+weavesilk.iml
+weavesilk.ipr
+weavesilk.iws
+local.properties
+
+#build
+build.xml
+out/
+
+#other
+proguard-project.txt
