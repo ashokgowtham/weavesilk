@@ -10,3 +10,7 @@ out/
 
 #other
 proguard-project.txt
+
+#generated files
+bin/
+gen/
