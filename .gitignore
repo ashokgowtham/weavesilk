@@ -1,7 +1,7 @@
 #ignore local project files
-weavesilk.iml
-weavesilk.ipr
-weavesilk.iws
+*.iml
+*.ipr
+*.iws
 local.properties
 
 #build
@@ -10,3 +10,10 @@ out/
 
 #other
 proguard-project.txt
+
+#generated files
+bin/
+gen/
+
+#IDEA
+.idea/
