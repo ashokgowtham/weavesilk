@@ -34,9 +34,31 @@ public class CustomImageView extends View implements View.OnTouchListener{
                 b;
     }
 
+    int rgb(double r, double g, double b){
+        int r1=(int)(r*255);
+        int g1=(int)(g*255);
+        int b1=(int)(b*255);
+        r1 = r1 & 0xff;
+        g1 = g1 & 0xff;
+        b1 = b1 & 0xff;
+
+        return  0xff << 24 |
+                r1 << 16 |
+                g1 << 8 |
+                b1;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(rgb(34,67,90));
+
+        //New Code:
+
+        Painter painter = new Painter(canvas);
+        painter.Draw();
+
+
+//Retaining old code for reference
 
         Paint paint = new Paint();
         paint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -45,7 +67,7 @@ public class CustomImageView extends View implements View.OnTouchListener{
         float cX,cY;
         float r;
 
-        int N = 200;
+        float N = 20;
 
         cX=200;
         cY=200;
@@ -53,12 +75,13 @@ public class CustomImageView extends View implements View.OnTouchListener{
         r=50;
 
         for (int i=0;i<N;i++){
-            paint.setColor(rgb(i,0,0));
+            float normalizedValue = i / N;
+            paint.setColor(rgb(normalizedValue, 0, 0));
 
             canvas.drawLine(
                     cX,cY,
-                    (int)(cX + r * Math.sin(i/255.0*2*Math.PI)),
-                    (int)(cY + r * Math.cos(i/255.0*2*Math.PI)),
+                    (int)(cX + r * Math.sin(normalizedValue *2*Math.PI)),
+                    (int)(cY + r * Math.cos(normalizedValue *2*Math.PI)),
                     paint);
         }
     }
@@ -66,6 +89,21 @@ public class CustomImageView extends View implements View.OnTouchListener{
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         //draw something based on touch
+
+        //however actual 'drawing' is not done here.
+        //this should only run the calculation logic.
+        //this invalidates the view - which will in turn get redrawn.
+        switch (motionEvent.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+         }
+
+        invalidate();
 
         return super.onTouchEvent(motionEvent);
     }
