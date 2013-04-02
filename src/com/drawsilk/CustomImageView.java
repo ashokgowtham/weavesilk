@@ -6,9 +6,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
-public class CustomImageView extends View{
+public class CustomImageView extends View implements View.OnTouchListener{
 
     public CustomImageView(Context context) {
         super(context);
@@ -41,13 +42,31 @@ public class CustomImageView extends View{
         paint.setFlags(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(rgb(0, 255, 0));
 
-        for (int i=0;i<255;i++){
+        float cX,cY;
+        float r;
+
+        int N = 200;
+
+        cX=200;
+        cY=200;
+
+        r=50;
+
+        for (int i=0;i<N;i++){
             paint.setColor(rgb(i,0,0));
+
             canvas.drawLine(
-                    200,200,
-                    (int)(200+400*Math.sin(i/255.0*2*Math.PI)),
-                    (int)(200+400*Math.cos(i/255.0*2*Math.PI)),
+                    cX,cY,
+                    (int)(cX + r * Math.sin(i/255.0*2*Math.PI)),
+                    (int)(cY + r * Math.cos(i/255.0*2*Math.PI)),
                     paint);
         }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        //draw something based on touch
+
+        return super.onTouchEvent(motionEvent);
     }
 }
